@@ -1,0 +1,5 @@
+[org.seedstack.seed]
+base-packages = com.github.adrienlauer.nightclazz
+core.application-id = nightclazz-ddd-sample
+core.application-name = NightClazz DDD
+

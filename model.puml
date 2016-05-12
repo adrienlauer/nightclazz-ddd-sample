@@ -1,0 +1,47 @@
+@startuml
+
+package order {
+    class Order << AGGR ROOT >> {
+        -Long: orderId
+        -Long: customerId
+        -Date: checkoutDate
+        -double: total
+
+        +checkout()
+        +addItem(OrderItem)
+        +removeItem(OrderItem)
+    }
+
+    class OrderItem << VO >> {
+        -long: productId
+        -int: quantity
+        -double: unitaryPrice
+    }
+
+    Order"1" *-- "*"OrderItem
+}
+
+package product {
+    class Product << AGGR ROOT >> {
+        -Long: productId
+        -String: description
+        -double: price
+    }
+}
+
+package seller {
+    class Seller << AGGR ROOT >> {
+        -Long: sellerId
+        -Date: hireDate
+        -String: bonusPolicy
+        -double: monthlyBonus
+
+        +enablePercentageBonusPolicy()
+        +revertBonusPolicy()
+        +addToMonthlyBonus()
+        +resetMonthlyBonus()
+    }
+
+}
+
+@enduml
