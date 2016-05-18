@@ -3,3 +3,14 @@ base-packages = com.github.adrienlauer.nightclazz
 core.application-id = nightclazz-ddd-sample
 core.application-name = NightClazz DDD
 
+[org.seedstack]
+mongodb.clients = main
+
+[org.seedstack.mongodb.client.main]
+hosts = docker
+databases = ddd
+
+[com.github.adrienlauer.nightclazz.domain.model.*]
+morphia.clientName = main
+morphia.dbName = ddd
+default-repository = org.seedstack.mongodb.morphia.Morphia

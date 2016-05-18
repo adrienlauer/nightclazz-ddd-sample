@@ -7,6 +7,8 @@
  */
 package com.github.adrienlauer.nightclazz.domain.model.order;
 
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 import org.seedstack.business.domain.BaseAggregateRoot;
 
 import java.util.Collection;
@@ -15,7 +17,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Entity
 public class Order extends BaseAggregateRoot<Long> {
+    @Id
     private Long orderId;
     private Long customerId;
     private Date checkoutDate;
@@ -25,6 +29,10 @@ public class Order extends BaseAggregateRoot<Long> {
     public Order(Long orderId, Long customerId) {
         this.orderId = orderId;
         this.customerId = customerId;
+    }
+
+    private Order() {
+        // required by Morphia
     }
 
     @Override

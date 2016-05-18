@@ -7,14 +7,18 @@
  */
 package com.github.adrienlauer.nightclazz.domain.model.seller;
 
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 import org.seedstack.business.domain.BaseAggregateRoot;
 
 import java.util.Date;
 
+@Entity
 public class Seller extends BaseAggregateRoot<Long> {
     public static final int SENIORITY_THRESHOLD = 90;
     public static final long MILLISECONDS_IN_A_DAY = 1000 * 60 * 60 * 24;
 
+    @Id
     private Long sellerId;
     private Date hireDate;
     private String bonusPolicy = BonusPolicy.PER_ITEM;
@@ -23,6 +27,10 @@ public class Seller extends BaseAggregateRoot<Long> {
     public Seller(long sellerId, Date hireDate) {
         this.sellerId = sellerId;
         this.hireDate = hireDate;
+    }
+
+    private Seller() {
+        // required by Morphia
     }
 
     @Override
