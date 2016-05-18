@@ -1,2 +1,22 @@
 {
+  "w20-core": {
+    "modules": {
+      "application": {
+        "home": "/welcome"
+      },
+      "hypermedia": {
+        "api": {
+          "nightclazz": "/"
+        }
+      }
+    }
+  },
+  "": {
+    "routes": {
+      "/welcome": {
+        "templateUrl": "welcome.html",
+        "hidden": true
+      }
+    }
+  }
 }

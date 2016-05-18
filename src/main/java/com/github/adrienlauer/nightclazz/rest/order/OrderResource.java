@@ -1,9 +1,10 @@
 package com.github.adrienlauer.nightclazz.rest.order;
 
 import com.github.adrienlauer.nightclazz.domain.model.order.Order;
+import com.github.adrienlauer.nightclazz.rest.Rels;
 import org.seedstack.business.assembler.FluentAssembler;
-import org.seedstack.business.assembler.ModelMapper;
 import org.seedstack.business.domain.Repository;
+import org.seedstack.seed.rest.Rel;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -25,7 +26,8 @@ public class OrderResource {
     private FluentAssembler fluentAssembler;
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Rel(value = Rels.ORDER_LIST, home = true)
+    @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
     public List<OrderRepresentation> listOrders(@QueryParam("customerId") Long customerId) {
         if (customerId == null) {
             return orderFinder.findAllOrders();
@@ -36,12 +38,13 @@ public class OrderResource {
 
     @GET
     @Path("/{orderId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public OrderRepresentation getOrderDetails(@PathParam("orderId") Long orderId) {
+    @Rel(value = Rels.ORDER_DETAILS, home = true)
+    @Produces({MediaType.APPLICATION_JSON, "application/hal+json"})
+    public OrderDetailsRepresentation getOrderDetails(@PathParam("orderId") Long orderId) {
         Order order = orderRepository.load(orderId);
         if (order == null) {
             throw new NotFoundException("Order " + orderId + " not found");
         }
-        return fluentAssembler.assemble(order).with(ModelMapper.class).to(OrderRepresentation.class);
+        return fluentAssembler.assemble(order).to(OrderDetailsRepresentation.class);
     }
 }

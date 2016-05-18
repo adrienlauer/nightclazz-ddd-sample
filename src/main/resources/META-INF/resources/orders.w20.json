@@ -1,0 +1,22 @@
+{
+  "id": "orders",
+  "name": "Order management",
+  "modules": {
+    "orders": {
+      "path": "{orders}/modules/orders",
+      "autoload": true
+    }
+  },
+  "routes": {
+    "/list": {
+      "templateUrl": "{orders}/views/list.html",
+      "controller": "OrderListController",
+      "label": "Orders"
+    },
+    "/details/:orderId": {
+      "templateUrl": "{orders}/views/details.html",
+      "controller": "OrderDetailsController",
+      "hidden": true
+    }
+  }
+}
